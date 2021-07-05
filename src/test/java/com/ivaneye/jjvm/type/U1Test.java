@@ -1,5 +1,6 @@
 package com.ivaneye.jjvm.type;
 
+import com.ivaneye.jjvm.domain.type.U1;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

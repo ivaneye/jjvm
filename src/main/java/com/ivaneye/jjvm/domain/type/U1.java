@@ -1,4 +1,4 @@
-package com.ivaneye.jjvm.type;
+package com.ivaneye.jjvm.domain.type;
 
 /**
  * 无符号1字节
