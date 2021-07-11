@@ -8,9 +8,9 @@ package com.ivaneye.jjvm.domain.type;
  */
 public class U1 {
 
-    private Byte data;
+    private byte data;
 
-    public U1(Byte data) {
+    public U1(byte data) {
         this.data = data;
     }
 

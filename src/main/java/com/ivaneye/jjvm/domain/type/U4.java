@@ -8,9 +8,9 @@ package com.ivaneye.jjvm.domain.type;
  */
 public class U4 {
 
-    private Byte[] datas;
+    private byte[] datas;
 
-    public U4(Byte[] datas) {
+    public U4(byte[] datas) {
         this.datas = datas;
     }
 
@@ -29,7 +29,7 @@ public class U4 {
         return str;
     }
 
-    public Byte[] toByteArray() {
+    public byte[] toByteArray() {
         return datas;
     }
 }

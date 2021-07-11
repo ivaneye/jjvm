@@ -8,10 +8,10 @@ package com.ivaneye.jjvm.domain.type;
  */
 public class U8 {
 
-    private Byte[] highDatas;
-    private Byte[] lowDatas;
+    private byte[] highDatas;
+    private byte[] lowDatas;
 
-    public U8(Byte[] highDatas, Byte[] lowDatas) {
+    public U8(byte[] highDatas, byte[] lowDatas) {
         this.highDatas = highDatas;
         this.lowDatas = lowDatas;
     }

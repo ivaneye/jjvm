@@ -8,9 +8,9 @@ package com.ivaneye.jjvm.domain.type;
  */
 public class U2 {
 
-    private Byte[] datas;
+    private byte[] datas;
 
-    public U2(Byte[] datas) {
+    public U2(byte[] datas) {
         this.datas = datas;
     }
 
