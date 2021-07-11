@@ -74,47 +74,61 @@ public class ClassReader {
                 case 1: {
                     U2 length = commonReader.readU2();
                     cpInfoMap.put(i, new ConstantUtf8(tag, length, commonReader.readByteArray(length.toInt()), classInfo));
+                    break;
                 }
                 case 3: {
                     cpInfoMap.put(i, new ConstantInteger(tag, commonReader.readU4(), classInfo));
+                    break;
                 }
                 case 4: {
                     cpInfoMap.put(i, new ConstantFloat(tag, commonReader.readU4(), classInfo));
+                    break;
                 }
                 case 5: {
                     cpInfoMap.put(i, new ConstantLong(tag, commonReader.readU4(), commonReader.readU4(), classInfo));
                     i += 1;
+                    break;
                 }
                 case 6: {
                     cpInfoMap.put(i, new ConstantDouble(tag, commonReader.readU4(), commonReader.readU4(), classInfo));
                     i += 1;
+                    break;
                 }
                 case 7: {
                     cpInfoMap.put(i, new ConstantClass(tag, commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 8: {
                     cpInfoMap.put(i, new ConstantString(tag, commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 9: {
                     cpInfoMap.put(i, new ConstantFieldRef(tag, commonReader.readU2(), commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 10: {
                     cpInfoMap.put(i, new ConstantMethodRef(tag, commonReader.readU2(), commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 11: {
                     cpInfoMap.put(i, new ConstantInterfaceMethodRef(tag, commonReader.readU2(), commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 12: {
                     cpInfoMap.put(i, new ConstantNameAndType(tag, commonReader.readU2(), commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 15: {
                     cpInfoMap.put(i, new ConstantMethodHandler(tag, commonReader.readU1(), commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 16: {
                     cpInfoMap.put(i, new ConstantMethodType(tag, commonReader.readU2(), classInfo));
+                    break;
                 }
                 case 18: {
                     cpInfoMap.put(i, new ConstantInvokeDynamic(tag, commonReader.readU2(), commonReader.readU2(), classInfo));
+                    break;
                 }
             }
         }
