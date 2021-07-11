@@ -1,5 +1,6 @@
 package com.ivaneye.jjvm.domain;
 
+import com.ivaneye.jjvm.domain.attr.Attribute;
 import com.ivaneye.jjvm.domain.constant.Constant;
 import com.ivaneye.jjvm.domain.type.U2;
 import com.ivaneye.jjvm.domain.type.U4;
@@ -41,5 +42,5 @@ public class ClassInfo {
     private List<MethodInfo> methods;
     // 属性
     private U2 attributesCount;
-    private List<AttributeInfo> attributes;
+    private List<Attribute> attributes;
 }
