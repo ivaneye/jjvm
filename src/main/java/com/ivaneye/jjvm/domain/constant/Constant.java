@@ -1,8 +1,10 @@
 package com.ivaneye.jjvm.domain.constant;
 
 /**
+ * 常量信息
+ *
  * @author ivaneye
- * @since 2021-07-10 22:43:54
+ * @since 2021-07-05 18:31:43
  */
 public interface Constant {
 

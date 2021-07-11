@@ -1,7 +1,9 @@
 package com.ivaneye.jjvm.domain;
 
+import com.ivaneye.jjvm.domain.constant.Constant;
 import com.ivaneye.jjvm.domain.type.U2;
 import com.ivaneye.jjvm.domain.type.U4;
+import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.util.Map;
  * @author ivaneye
  * @since 2021-07-05 18:17:02
  */
+@Data
 public class ClassInfo {
     private U4 magic;
     // 魔术
@@ -20,7 +23,7 @@ public class ClassInfo {
     private U2 majorVersion;
     // 常量池
     private U2 constantPoolCount;
-    private Map<Integer, ConstantInfo> constantPool;
+    private Map<Integer, Constant> constantPool;
     // 掩码标志
     private U2 accessFlags;
     // 当前类/接口
