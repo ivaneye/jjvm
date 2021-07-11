@@ -32,7 +32,7 @@ public class ConstantFloat implements Constant {
         if (bits >> 31 == 0) {
             s = 1;
         }
-        int e = bits >> 23 & 0xff;
+        int e = (bits >> 23) & 0xff;
         int m;
         if (e == 0) {
             m = (bits & 0x7fffff) << 1;
