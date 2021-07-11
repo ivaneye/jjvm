@@ -1,8 +1,12 @@
 package com.ivaneye.jjvm.finder;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * @author ivaneye
@@ -12,17 +16,20 @@ public class DirFinder implements Finder {
 
     private List<Finder> finders = new ArrayList<>();
 
-    public DirFinder(String cpStr) {
-        // todo
-//        val dir = File(cpStr)
-//        val files = dir.walk().filter { file -> file.name.endsWith(".jar") || file.name.endsWith(".class") }
-//        files.forEach { f ->
-//            if (f.name.endsWith(".jar")) {
-//                finders.add(JarFinder(f.absolutePath))
-//            } else if (f.name.endsWith(".class")) {
-//                finders.add(FileFinder(f.absolutePath))
-//            }
-//        }
+    public DirFinder(String cpStr) throws IOException {
+        Path dir = Paths.get(cpStr);
+        Stream<Path> files = Files.walk(dir).filter(file -> {
+            return file.getFileName().endsWith(".jar")
+                    || file.getFileName().endsWith(".class");
+        });
+        files.forEach(f -> {
+                    if (f.getFileName().endsWith(".jar")) {
+                        finders.add(new JarFinder(f.toAbsolutePath().toString()));
+                    } else if (f.getFileName().endsWith(".class")) {
+                        finders.add(new FileFinder(f.toAbsolutePath().toString()));
+                    }
+                }
+        );
     }
 
     @Override
