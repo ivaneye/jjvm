@@ -8,32 +8,35 @@ import com.ivaneye.jjvm.domain.type.U2;
  * @author ivaneye
  * @since 2021-07-10 22:45:09
  */
-public class ConstantString implements Constant {
+public class ConstantNameAndType implements Constant {
 
     private U1 tag;
-    private U2 strIndex;
+    private U2 nameIndex;
+    private U2 descIndex;
     private ClassInfo classInfo;
 
-    public ConstantString(U1 tag, U2 strIndex, ClassInfo classInfo) {
+    public ConstantNameAndType(U1 tag, U2 nameIndex, U2 descIndex, ClassInfo classInfo) {
         this.tag = tag;
-        this.strIndex = strIndex;
+        this.nameIndex = nameIndex;
+        this.descIndex = descIndex;
         this.classInfo = classInfo;
     }
 
     @Override
     public String type() {
-        return "String";
+        return "NameAndType";
     }
 
     @Override
     public String value() {
-        return classInfo.getConstantPool().get(strIndex.toInt()).value();
+        return classInfo.getConstantPool().get(nameIndex.toInt()).value() + ":"
+                + classInfo.getConstantPool().get(descIndex.toInt()).value();
     }
 
     @Override
     public String toString() {
         return type()
-                + "    #" + strIndex.toInt()
+                + "    #" + nameIndex.toInt() + ":#" + descIndex.toInt()
                 + "    // " + value();
     }
 }

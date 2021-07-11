@@ -32,6 +32,8 @@ public class ConstantClass implements Constant {
 
     @Override
     public String toString() {
-        return type() + "    " + nameIndex.toInt() + "    // " + value();
+        return type()
+                + "    #" + nameIndex.toInt()
+                + "    // " + value();
     }
 }
