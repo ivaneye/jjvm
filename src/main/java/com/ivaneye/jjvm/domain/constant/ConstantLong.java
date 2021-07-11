@@ -3,33 +3,35 @@ package com.ivaneye.jjvm.domain.constant;
 import com.ivaneye.jjvm.domain.ClassInfo;
 import com.ivaneye.jjvm.domain.type.U1;
 import com.ivaneye.jjvm.domain.type.U2;
+import com.ivaneye.jjvm.domain.type.U4;
+import com.ivaneye.jjvm.domain.type.U8;
 
 /**
  * @author ivaneye
  * @since 2021-07-10 22:45:09
  */
-public class ConstantUtf8 implements Constant {
+public class ConstantLong implements Constant {
 
     private U1 tag;
-    private U2 length;
-    private byte[] arr;
+    private U4 highBytes;
+    private U4 lowBytes;
     private ClassInfo classInfo;
 
-    public ConstantUtf8(U1 tag, U2 length, byte[] arr, ClassInfo classInfo) {
+    public ConstantLong(U1 tag, U4 highBytes, U4 lowBytes, ClassInfo classInfo) {
         this.tag = tag;
-        this.length = length;
-        this.arr = arr;
+        this.highBytes = highBytes;
+        this.lowBytes = lowBytes;
         this.classInfo = classInfo;
     }
 
     @Override
     public String type() {
-        return "Utf8";
+        return "Long";
     }
 
     @Override
     public String value() {
-        return new String(arr);
+        return new U8(highBytes.toByteArray(), lowBytes.toByteArray()).toLong() + "L";
     }
 
     @Override
