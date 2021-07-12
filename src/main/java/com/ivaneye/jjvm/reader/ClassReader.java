@@ -67,7 +67,7 @@ public class ClassReader {
         //常量池下标从1开始
         Map<Integer, Constant> cpInfoMap = new HashMap<>();
         int i = 0;
-        while (i < classInfo.getConstantPoolCount().toInt()) {
+        while (i < classInfo.getConstantPoolCount().toInt() - 1) {
             U1 tag = commonReader.readU1();
             i += 1;
             switch (tag.toInt()) {

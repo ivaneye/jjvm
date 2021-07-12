@@ -19,13 +19,13 @@ public class DirFinder implements Finder {
     public DirFinder(String cpStr) throws IOException {
         Path dir = Paths.get(cpStr);
         Stream<Path> files = Files.walk(dir).filter(file -> {
-            return file.getFileName().endsWith(".jar")
-                    || file.getFileName().endsWith(".class");
+            return file.getFileName().toString().endsWith(".jar")
+                    || file.getFileName().toString().endsWith(".class");
         });
         files.forEach(f -> {
-                    if (f.getFileName().endsWith(".jar")) {
+                    if (f.getFileName().toString().endsWith(".jar")) {
                         finders.add(new JarFinder(f.toAbsolutePath().toString()));
-                    } else if (f.getFileName().endsWith(".class")) {
+                    } else if (f.getFileName().toString().endsWith(".class")) {
                         finders.add(new FileFinder(f.toAbsolutePath().toString()));
                     }
                 }

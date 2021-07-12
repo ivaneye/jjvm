@@ -43,4 +43,48 @@ public class ClassInfo {
     // 属性
     private U2 attributesCount;
     private List<Attribute> attributes;
+
+    public String magic() {
+        return "0x" + magic.toHexString();
+    }
+
+    public int minorVersion() {
+        return minorVersion.toInt();
+    }
+
+    public int majorVersion() {
+        return majorVersion.toInt();
+    }
+
+    public int constantPoolCount() {
+        return constantPoolCount.toInt();
+    }
+
+    public Map<Integer, Constant> constantPool() {
+        return constantPool;
+    }
+
+    public String accessFlags() {
+        return accessFlags.toHexString();
+    }
+
+    public int thisClass() {
+        return thisClass.toInt();
+    }
+
+    public int superClass() {
+        return superClass.toInt();
+    }
+
+    public int interfacesCount() {
+        return interfacesCount.toInt();
+    }
+
+    public int fieldsCount() {
+        return fieldsCount.toInt();
+    }
+
+    public int methodsCount() {
+        return methodsCount.toInt();
+    }
 }
