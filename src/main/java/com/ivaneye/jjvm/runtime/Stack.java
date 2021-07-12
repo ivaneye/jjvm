@@ -8,10 +8,12 @@ package com.ivaneye.jjvm.runtime;
  */
 public class Stack {
 
-    // 局部变量表
-    private String localVarTable;
-    // 操作数栈
-    private String operandStack;
-    // 动态链接
-    private String dynamicLink;
+    public void push(Frame frame) {
+        // todo 压入栈帧
+    }
+
+    public Frame pop() {
+        // todo 弹出栈帧
+        return new Frame();
+    }
 }
