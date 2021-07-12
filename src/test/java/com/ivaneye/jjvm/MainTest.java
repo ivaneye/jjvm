@@ -44,10 +44,11 @@ public class MainTest {
         System.out.println(classInfo.thisClass());
         System.out.println(classInfo.superClass());
         System.out.println(classInfo.interfacesCount());
-//        System.out.println(classInfo.interfaces());
+        System.out.println(classInfo.interfaces());
         System.out.println(classInfo.fieldsCount());
-//        System.out.println(classInfo.fields());
+        System.out.println(classInfo.fields());
         System.out.println(classInfo.methodsCount());
+        System.out.println(classInfo.methods());
     }
 
     @Test

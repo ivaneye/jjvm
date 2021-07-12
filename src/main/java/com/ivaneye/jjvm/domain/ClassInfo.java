@@ -6,8 +6,10 @@ import com.ivaneye.jjvm.domain.type.U2;
 import com.ivaneye.jjvm.domain.type.U4;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 类文件信息
@@ -68,23 +70,49 @@ public class ClassInfo {
         return accessFlags.toHexString();
     }
 
-    public int thisClass() {
-        return thisClass.toInt();
+    public String thisClass() {
+        Integer idx = thisClass.toInt();
+        return "#" + idx + " // " + constantPool.get(idx);
     }
 
-    public int superClass() {
-        return superClass.toInt();
+    public String superClass() {
+        Integer idx = superClass.toInt();
+        return "#" + idx + " // " + constantPool.get(idx);
     }
 
     public int interfacesCount() {
         return interfacesCount.toInt();
     }
 
+    public List<String> interfaces() {
+        ArrayList<String> interfaceList = new ArrayList<>();
+        if (interfacesCount() > 0) {
+            return interfaces.stream().map(it -> {
+                return "#" + it.toInt() + " // " + constantPool.get(it.toInt());
+            }).collect(Collectors.toList());
+        }
+        return interfaceList;
+    }
+
     public int fieldsCount() {
         return fieldsCount.toInt();
     }
 
+    public List<String> fields() {
+        if (fieldsCount() > 0) {
+            return fields.stream().map(it -> it.info(this)).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
     public int methodsCount() {
         return methodsCount.toInt();
+    }
+
+    public List<String> methods() {
+        if (methodsCount() > 0) {
+            return methods.stream().map(it -> it.info(this)).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 }

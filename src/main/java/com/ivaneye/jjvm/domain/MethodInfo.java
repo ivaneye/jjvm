@@ -26,4 +26,10 @@ public class MethodInfo {
         this.attrCount = attrCount;
         this.attrs = attrs;
     }
+
+    public String info(ClassInfo classInfo) {
+        return accFlag.toHexString() +
+                " #" + nameIdx.toInt() + " // " + classInfo.constantPool().get(nameIdx.toInt())
+                + " #" + descIdx.toInt() + " // " + classInfo.constantPool().get(descIdx.toInt());
+    }
 }
