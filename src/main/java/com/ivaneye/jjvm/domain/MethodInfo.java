@@ -4,6 +4,7 @@ import com.ivaneye.jjvm.domain.attr.Attribute;
 import com.ivaneye.jjvm.domain.type.U2;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 方法信息
@@ -30,6 +31,7 @@ public class MethodInfo {
     public String info(ClassInfo classInfo) {
         return accFlag.toHexString() +
                 " #" + nameIdx.toInt() + " // " + classInfo.constantPool().get(nameIdx.toInt())
-                + " #" + descIdx.toInt() + " // " + classInfo.constantPool().get(descIdx.toInt());
+                + " #" + descIdx.toInt() + " // " + classInfo.constantPool().get(descIdx.toInt())
+                + attrs.stream().map(it -> it.info(classInfo)).collect(Collectors.toList());
     }
 }

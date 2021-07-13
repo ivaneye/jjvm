@@ -3,10 +3,14 @@ package com.ivaneye.jjvm.reader;
 import com.ivaneye.jjvm.domain.ClassInfo;
 import com.ivaneye.jjvm.domain.FieldInfo;
 import com.ivaneye.jjvm.domain.MethodInfo;
-import com.ivaneye.jjvm.domain.attr.Attribute;
+import com.ivaneye.jjvm.domain.attr.*;
+import com.ivaneye.jjvm.domain.attr.sub.ExceptionTable;
+import com.ivaneye.jjvm.domain.attr.sub.LineNumberInfo;
+import com.ivaneye.jjvm.domain.attr.sub.LocalVariableInfo;
 import com.ivaneye.jjvm.domain.constant.*;
 import com.ivaneye.jjvm.domain.type.U1;
 import com.ivaneye.jjvm.domain.type.U2;
+import com.ivaneye.jjvm.domain.type.U4;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -191,7 +195,7 @@ public class ClassReader {
         int count = classInfo.getMethodsCount().toInt();
         if (count > 0) {
             List<MethodInfo> arr = new ArrayList<>();
-            for (int i = 0; i < count - 1; i++) {
+            for (int i = 0; i < count; i++) {
                 U2 accFlag = commonReader.readU2();
                 U2 nameIdx = commonReader.readU2();
                 U2 descIdx = commonReader.readU2();
@@ -214,14 +218,99 @@ public class ClassReader {
     }
 
     private List<Attribute> readAttributes(int count) {
+        List<Attribute> attrs = new ArrayList<>();
         if (count > 0) {
-            for (int i = 0; i < count - 1; i++) {
+            for (int i = 0; i < count; i++) {
                 U2 attributeNameIndex = commonReader.readU2();
-                switch (attributeNameIndex.toInt()) {
+                String name = classInfo.getConstantPool().get(attributeNameIndex.toInt()).value();
+                System.out.println(name);
+                switch (name) {
                     // todo 处理属性
+                    case "Code": {
+                        Code attr = new Code();
+                        attr.setAttributeNameIndex(attributeNameIndex);
+                        attr.setAttributeLength(commonReader.readU4());
+                        attr.setMaxStack(commonReader.readU2());
+                        attr.setMaxLocals(commonReader.readU2());
+                        // code
+                        U4 codeLength = commonReader.readU4();
+                        attr.setCodeLength(codeLength);
+                        if (codeLength.toInt() > 0) {
+                            U1[] c = new U1[codeLength.toInt()];
+                            for (int idx = 0; idx < c.length; idx++) {
+                                c[idx] = commonReader.readU1();
+                            }
+                            attr.setCode(c);
+                        }
+                        // exception
+                        U2 ecLength = commonReader.readU2();
+                        attr.setExceptionTableLength(ecLength);
+                        if (ecLength.toInt() > 0) {
+                            ExceptionTable[] tables = new ExceptionTable[ecLength.toInt()];
+                            for (int idx = 0; i < tables.length; idx++) {
+                                tables[idx] = new ExceptionTable(commonReader.readU2(), commonReader.readU2(), commonReader.readU2(), commonReader.readU2());
+                            }
+                            attr.setExceptionTable(tables);
+                        }
+                        // attr
+                        U2 attrCount = commonReader.readU2();
+                        attr.setAttributesCount(attrCount);
+                        attr.setAttributes(readAttributes(attrCount.toInt()).toArray(new Attribute[0]));
+                        attrs.add(attr);
+                        break;
+                    }
+                    case "LineNumberTable": {
+                        LineNumberTable attr = new LineNumberTable();
+                        attr.setAttributeNameIndex(attributeNameIndex);
+                        attr.setAttributeLength(commonReader.readU4());
+                        // lineNumberTableLength
+                        U2 lineNumberCount = commonReader.readU2();
+                        attr.setLineNumberTableLength(lineNumberCount);
+                        if (lineNumberCount.toInt() > 0) {
+                            LineNumberInfo[] c = new LineNumberInfo[lineNumberCount.toInt()];
+                            for (int idx = 0; idx < c.length; idx++) {
+                                c[idx] = new LineNumberInfo(commonReader.readU2(), commonReader.readU2());
+                            }
+                            attr.setLineNumberTable(c);
+                        }
+                        attrs.add(attr);
+                        break;
+                    }
+                    case "LocalVariableTable": {
+                        LocalVariableTable attr = new LocalVariableTable();
+                        attr.setAttributeNameIndex(attributeNameIndex);
+                        attr.setAttributeLength(commonReader.readU4());
+                        // localVariableTableLength
+                        U2 localVariableCount = commonReader.readU2();
+                        attr.setLocalVariableTableLength(localVariableCount);
+                        if (localVariableCount.toInt() > 0) {
+                            LocalVariableInfo[] c = new LocalVariableInfo[localVariableCount.toInt()];
+                            for (int idx = 0; idx < c.length; idx++) {
+                                c[idx] = new LocalVariableInfo(commonReader.readU2(),
+                                        commonReader.readU2(),
+                                        commonReader.readU2(),
+                                        commonReader.readU2(),
+                                        commonReader.readU2());
+                            }
+                            attr.setLocalVariableTable(c);
+                        }
+                        attrs.add(attr);
+                        break;
+                    }
+                    case "SourceFile": {
+                        SourceFile attr = new SourceFile();
+                        attr.setAttributeNameIndex(attributeNameIndex);
+                        attr.setAttributeLength(commonReader.readU4());
+                        attr.setSourceFileIndex(commonReader.readU2());
+                        attrs.add(attr);
+                        break;
+                    }
+                    default: {
+                        throw new RuntimeException("Attr[" + name + "] not supported!");
+                    }
                 }
             }
         }
-        return new ArrayList<>();
+        return attrs;
     }
 }

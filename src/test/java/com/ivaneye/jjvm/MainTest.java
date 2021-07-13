@@ -49,6 +49,9 @@ public class MainTest {
         System.out.println(classInfo.fields());
         System.out.println(classInfo.methodsCount());
         System.out.println(classInfo.methods());
+        System.out.println(classInfo.attributesCount());
+        System.out.println(classInfo.attributes());
+        System.out.println("}");
     }
 
     @Test

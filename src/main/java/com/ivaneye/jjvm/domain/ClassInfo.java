@@ -111,7 +111,18 @@ public class ClassInfo {
 
     public List<String> methods() {
         if (methodsCount() > 0) {
-            return methods.stream().map(it -> it.info(this)).collect(Collectors.toList());
+            return methods.stream().map(it -> it.info(this) + "\r\n").collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
+    public int attributesCount() {
+        return attributesCount.toInt();
+    }
+
+    public List<String> attributes() {
+        if (attributesCount() > 0) {
+            return attributes.stream().map(it -> it.info(this) + "\r\n").collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
