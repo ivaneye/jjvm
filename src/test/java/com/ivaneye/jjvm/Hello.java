@@ -10,5 +10,5 @@ public class Hello {
         System.out.println("Hello");
     }
 
-//    public native void hello();
+    public native void hello();
 }

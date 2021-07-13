@@ -223,7 +223,6 @@ public class ClassReader {
             for (int i = 0; i < count; i++) {
                 U2 attributeNameIndex = commonReader.readU2();
                 String name = classInfo.getConstantPool().get(attributeNameIndex.toInt()).value();
-                System.out.println(name);
                 switch (name) {
                     // todo 处理属性
                     case "Code": {

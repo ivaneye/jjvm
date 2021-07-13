@@ -29,9 +29,9 @@ public class MethodInfo {
     }
 
     public String info(ClassInfo classInfo) {
-        return accFlag.toHexString() +
-                " #" + nameIdx.toInt() + " // " + classInfo.constantPool().get(nameIdx.toInt())
-                + " #" + descIdx.toInt() + " // " + classInfo.constantPool().get(descIdx.toInt())
+        return classInfo.constantPool().get(nameIdx.toInt()).value() + "\r\n"
+                + "descriptor: " + classInfo.constantPool().get(descIdx.toInt()).value() + "\r\n"
+                + "flags: " + accFlag.toHexString() + "\r\n"
                 + attrs.stream().map(it -> it.info(classInfo)).collect(Collectors.toList());
     }
 }

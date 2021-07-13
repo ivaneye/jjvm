@@ -30,28 +30,7 @@ public class MainTest {
         byte[] classData = cp.readClass(className);
         ClassReader classReader = new ClassReader(classData);
         ClassInfo classInfo = classReader.readClass();
-        System.out.println(classInfo.magic());
-        System.out.println(classInfo.minorVersion());
-        System.out.println(classInfo.majorVersion());
-        System.out.println(classInfo.constantPoolCount());
-        System.out.println("Constant pool:");
-        Map<Integer, Constant> constantPool = classInfo.constantPool();
-        for (Integer key : constantPool.keySet()) {
-            System.out.println("#" + key + " = " + constantPool.get(key));
-        }
-        System.out.println("{");
-        System.out.println(classInfo.accessFlags());
-        System.out.println(classInfo.thisClass());
-        System.out.println(classInfo.superClass());
-        System.out.println(classInfo.interfacesCount());
-        System.out.println(classInfo.interfaces());
-        System.out.println(classInfo.fieldsCount());
-        System.out.println(classInfo.fields());
-        System.out.println(classInfo.methodsCount());
-        System.out.println(classInfo.methods());
-        System.out.println(classInfo.attributesCount());
-        System.out.println(classInfo.attributes());
-        System.out.println("}");
+        classInfo.show();
     }
 
     @Test

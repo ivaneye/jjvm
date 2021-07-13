@@ -50,12 +50,12 @@ public class ClassInfo {
         return "0x" + magic.toHexString();
     }
 
-    public int minorVersion() {
-        return minorVersion.toInt();
+    public String minorVersion() {
+        return "minor version: " + minorVersion.toInt();
     }
 
-    public int majorVersion() {
-        return majorVersion.toInt();
+    public String majorVersion() {
+        return "major version: " + majorVersion.toInt();
     }
 
     public int constantPoolCount() {
@@ -67,12 +67,12 @@ public class ClassInfo {
     }
 
     public String accessFlags() {
-        return accessFlags.toHexString();
+        return "flags: " + accessFlags.toHexString();
     }
 
     public String thisClass() {
         Integer idx = thisClass.toInt();
-        return "#" + idx + " // " + constantPool.get(idx);
+        return "class " + constantPool.get(idx).value().replaceAll("/", ".");
     }
 
     public String superClass() {
@@ -125,5 +125,24 @@ public class ClassInfo {
             return attributes.stream().map(it -> it.info(this) + "\r\n").collect(Collectors.toList());
         }
         return new ArrayList<>();
+    }
+
+    public void show() {
+        System.out.println(thisClass());
+//        System.out.println(superClass());
+//        System.out.println(interfaces());
+        System.out.println(minorVersion());
+        System.out.println(majorVersion());
+        System.out.println(accessFlags());
+        System.out.println("Constant pool:");
+        Map<Integer, Constant> constantPool = constantPool();
+        for (Integer key : constantPool.keySet()) {
+            System.out.println("#" + key + " = " + constantPool.get(key));
+        }
+        System.out.println("{");
+        System.out.println(fields());
+        System.out.println(methods());
+        System.out.println("}");
+        System.out.println(attributes());
     }
 }
