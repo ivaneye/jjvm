@@ -1,5 +1,6 @@
-package com.ivaneye.jjvm.domain.attr;
+package com.ivaneye.jjvm.domain.attr.sub;
 
+import com.ivaneye.jjvm.domain.attr.LocalVariableInfo;
 import com.ivaneye.jjvm.domain.type.U2;
 import com.ivaneye.jjvm.domain.type.U4;
 

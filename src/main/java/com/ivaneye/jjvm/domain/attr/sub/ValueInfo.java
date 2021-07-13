@@ -1,5 +1,8 @@
-package com.ivaneye.jjvm.domain.attr;
+package com.ivaneye.jjvm.domain.attr.sub;
 
+import com.ivaneye.jjvm.domain.attr.sub.AnnotationInfo;
+import com.ivaneye.jjvm.domain.attr.sub.ArrayValueInfo;
+import com.ivaneye.jjvm.domain.attr.sub.EnumConstValueInfo;
 import com.ivaneye.jjvm.domain.type.U2;
 
 /**

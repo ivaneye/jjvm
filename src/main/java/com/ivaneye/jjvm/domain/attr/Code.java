@@ -1,5 +1,6 @@
 package com.ivaneye.jjvm.domain.attr;
 
+import com.ivaneye.jjvm.domain.attr.sub.ExceptionTable;
 import com.ivaneye.jjvm.domain.type.U1;
 import com.ivaneye.jjvm.domain.type.U2;
 import com.ivaneye.jjvm.domain.type.U4;

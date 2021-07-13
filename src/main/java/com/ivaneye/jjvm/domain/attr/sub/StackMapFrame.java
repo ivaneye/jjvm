@@ -1,4 +1,4 @@
-package com.ivaneye.jjvm.domain.attr;
+package com.ivaneye.jjvm.domain.attr.sub;
 
 /**
  * @author ivaneye
