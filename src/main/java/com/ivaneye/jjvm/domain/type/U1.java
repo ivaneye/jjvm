@@ -17,4 +17,8 @@ public class U1 {
     public Integer toInt() {
         return Byte.toUnsignedInt(data);
     }
+
+    public String toHexString() {
+        return Integer.toHexString(Byte.toUnsignedInt(data)).toUpperCase();
+    }
 }
