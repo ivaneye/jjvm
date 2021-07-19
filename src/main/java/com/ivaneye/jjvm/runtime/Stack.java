@@ -1,5 +1,7 @@
 package com.ivaneye.jjvm.runtime;
 
+import java.util.LinkedList;
+
 /**
  * Java栈
  *
@@ -8,12 +10,16 @@ package com.ivaneye.jjvm.runtime;
  */
 public class Stack {
 
+    // 栈帧
+    private LinkedList<Frame> frames = new LinkedList<>();
+
     public void push(Frame frame) {
-        // todo 压入栈帧
+        // 压入栈帧
+        frames.push(frame);
     }
 
     public Frame pop() {
-        // todo 弹出栈帧
-        return new Frame();
+        // 弹出栈帧
+        return frames.pop();
     }
 }

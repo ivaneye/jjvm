@@ -8,6 +8,8 @@ package com.ivaneye.jjvm.runtime;
  */
 public class Frame {
 
+    // 程序计数器
+    private int pc;
     // 局部变量表
     private String localVarTable;
     // 操作数栈
